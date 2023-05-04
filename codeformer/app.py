@@ -97,6 +97,7 @@ def inference_app(
     print("Inp:", image, background_enhance, face_upsample, upscale, codeformer_fidelity)
     image = image.convert("RGB")
     img = np.array(image)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
     print("\timage size:", img.shape)
 
     upscale = int(upscale)  # convert type to int
