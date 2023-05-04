@@ -1,6 +1,7 @@
 import os
 
 import cv2
+import numpy as np
 import torch
 from PIL import Image
 from torchvision.transforms.functional import normalize
@@ -85,15 +86,19 @@ codeformer_net.eval()
 os.makedirs("output", exist_ok=True)
 
 
-def inference_app(image, background_enhance, face_upsample, upscale, codeformer_fidelity):
+def inference_app(
+    image: Image, background_enhance: bool, face_upsample: bool, upscale: int, codeformer_fidelity: float
+):
     # take the default setting for the demo
     has_aligned = False
     only_center_face = False
     draw_box = False
     detection_model = "retinaface_resnet50"
     print("Inp:", image, background_enhance, face_upsample, upscale, codeformer_fidelity)
-
-    img = cv2.imread(str(image), cv2.IMREAD_COLOR)
+    image = image.convert("RGB")
+    open_cv_image = np.array(image)
+    # Convert RGB to BGR
+    img = open_cv_image[:, :, ::-1].copy()
     print("\timage size:", img.shape)
 
     upscale = int(upscale)  # convert type to int
