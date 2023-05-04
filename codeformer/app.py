@@ -96,9 +96,7 @@ def inference_app(
     detection_model = "retinaface_resnet50"
     print("Inp:", image, background_enhance, face_upsample, upscale, codeformer_fidelity)
     image = image.convert("RGB")
-    open_cv_image = np.array(image)
-    # Convert RGB to BGR
-    img = open_cv_image[:, :, ::-1].copy()
+    img = np.array(image)
     print("\timage size:", img.shape)
 
     upscale = int(upscale)  # convert type to int
