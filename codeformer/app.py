@@ -2,6 +2,7 @@ import os
 
 import cv2
 import torch
+from PIL import Image
 from torchvision.transforms.functional import normalize
 
 from codeformer.basicsr.archs.rrdbnet_arch import RRDBNet
@@ -173,7 +174,8 @@ def inference_app(image, background_enhance, face_upsample, upscale, codeformer_
         else:
             restored_img = face_helper.paste_faces_to_input_image(upsample_img=bg_img, draw_box=draw_box)
 
-    # save restored img
-    save_path = f"output/out.png"
-    imwrite(restored_img, str(save_path))
-    return save_path
+    # # save restored img
+    # save_path = f"output/out.png"
+    # imwrite(restored_img, str(save_path))
+
+    return Image.fromarray(restored_img)
