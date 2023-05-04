@@ -180,5 +180,5 @@ def inference_app(
     # # save restored img
     # save_path = f"output/out.png"
     # imwrite(restored_img, str(save_path))
-
+    restored_img = cv2.cvtColor(restored_img, cv2.COLOR_BGR2RGB)
     return Image.fromarray(restored_img)
